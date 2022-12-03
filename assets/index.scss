@@ -1,0 +1,17 @@
+---
+---
+@import "global";
+
+
+h1 {
+  // text-transform: uppercase;
+}
+
+p {
+  // font-family: "Playfair Display", Georgia, serif;
+}
+
+p {
+  &.justify { text-align: justify; }
+  &.center { text-align: center; }
+}

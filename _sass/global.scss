@@ -1,0 +1,81 @@
+// Eagle #b5b5a1 
+// San Juan #2a4a65 
+// Marigold #c28629 
+// Medium Carmine #aa4b35
+$background-color: #2a4a65; // San Juan
+$text-color: #b5b5a1; // Eagle
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  color: $text-color;
+  background-color: $background-color;
+  overflow: hidden;
+}
+div.wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+}
+header {
+  min-height: 10em;
+  height: 12em;
+  padding-top: 3em;
+  text-align: center;
+  h1 {
+    color: #c28629;
+    text-transform: uppercase;
+    line-height: 3rem;
+    margin: 2rem 0 1rem 0;
+    font-size: 3rem;
+  }
+  h2 {
+    color: #c28629;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }  
+}
+footer {
+  // min-height: 10em;
+  text-align: center;
+  > p {
+      padding-top: 2em;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+@media only screen and (min-width: 600px) {
+  header {
+    h1 {
+      font-size: 4.5rem;
+      line-height: 4.5rem;
+    }
+    h2 {
+      font-size: 2.75rem;
+    }
+  }
+  main {
+    p {
+      font-size: 2em;
+    }
+  }
+  footer {
+    > p {
+      font-size: 1.5em;
+    }
+  }
+}

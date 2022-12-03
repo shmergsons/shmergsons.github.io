@@ -1,0 +1,20 @@
+lsi: false
+safe: true
+source: ./
+incremental: false
+#highlighter: rouge
+#gist:
+#  noscript: false
+#kramdown:
+#  math_engine: mathjax
+#  syntax_highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENCE
+  - .git/
+  - .bundle/
+  - .jekyll-cache/
+  - vendor/
