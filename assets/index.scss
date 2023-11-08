@@ -3,6 +3,22 @@
 @import "global";
 
 
+@font-face {
+  font-family: 'OCR A Std';
+  font-style: normal;
+  font-weight: normal;
+  src: local('OCR A Std'), url('OCRAStd.woff') format('woff');
+}
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 20%, rgba(2, 65, 48, 1) 100%);
+}
+h1,h2 {
+  font-family: 'OCR A Std', ocr-a-std, monospace;
+  font-style: normal;
+  font-weight: 400;
+}
 h1 {
   // text-transform: uppercase;
 }
