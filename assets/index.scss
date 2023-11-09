@@ -12,7 +12,16 @@
 
 body {
   background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 20%, rgba(2, 65, 48, 1) 100%);
+  // background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 20%, rgba(2, 65, 48, 1) 100%);
+  background: url("circuit-board.png"),
+    linear-gradient(180deg, black 0%, black 20%, #024130 100%),
+    #024130;
+  background-size: 640px, auto, auto;
+  background-repeat: no-repeat;
+  background-position: calc(100vw - 600px) -88px, left top, left top;
+}
+header {
+  // background-image: url('circuit-board.png');
 }
 h1,h2 {
   font-family: 'OCR A Std', ocr-a-std, monospace;
@@ -20,11 +29,14 @@ h1,h2 {
   font-weight: 400;
 }
 h1 {
-  // text-transform: uppercase;
+   // text-transform: uppercase;
 }
 
 p {
-  // font-family: "Playfair Display", Georgia, serif;
+  // font-family: "IBM Plex Sans", "Playfair Display", Georgia, serif;
+  //  font-family: "Playfair Display", Georgia, serif;
+   font-family: sans;
+   line-height: 135%;
 }
 
 p {
