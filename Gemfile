@@ -2,6 +2,7 @@
 source "https://rubygems.org"
 
 gem "jekyll"
+gem "faraday-retry"
 
 # Gems loaded irrespective of site configuration.
 group :jekyll_plugins do
