@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" lang="en-GB" aria-labelledby="title" viewBox="0 0 200 24"> 
+  <title id="title">Email Us!</title>
+  <defs>
+    <style type="text/css"><![CDATA[
+  rect {
+    width: 12em;
+    height: 1.5em;
+    fill: transparent;
+  }
+
+  a:focus rect,
+  rect:hover {
+    rx: 4px;
+    ry: 4px;
+  }
+
+  text {
+    font-size: 16px;
+    fill: #e5e5e5;
+    pointer-events: none;
+  }
+
+  a:focus text,
+  rect:hover + text {
+    fill: #ffffff;
+    text-shadow: .2em .2em .2em rgba(0, 0, 0, 0.2);
+    inner-glow: .2em .2em .2em rgba(0, 0, 0, 0.2);
+    text-decoration: underline .25em solid rgb(255, 255, 255);
+    text-underline-offset: 1.2em;
+  }
+  ]]></style>
+  </defs>
+  <a href="mailto:shmergsons@gmail.com" aria-label="Email Us!">
+    <rect />
+    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">shmergsons@gmail.com</text>
+  </a>
+</svg>
