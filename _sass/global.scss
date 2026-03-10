@@ -24,7 +24,9 @@ body {
 div.wrapper {
   max-width: 640px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2.5rem;
+  background: rgba(0, 0, 0, 0.55);
+  min-height: 100vh;
 }
 header {
   min-height: 10em;
