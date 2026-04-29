@@ -51,6 +51,7 @@ header {
 footer {
   // min-height: 10em;
   text-align: center;
+  padding-bottom: 1.5em;
   > p {
       padding-top: 2em;
   }
@@ -70,19 +71,19 @@ h6 {
 
 @media only screen and (min-width: 600px) {
   header {
-    padding-top: 3em;
+    padding-top: 2em;
     h1 {
-      font-size: 4.5rem;
-      line-height: 4.5rem;
-      margin: 2rem 0 1rem 0;
+      font-size: 3.6rem;
+      line-height: 3.8rem;
+      margin: 1.25rem 0 0.75rem 0;
     }
     h2 {
-      font-size: 2.75rem;
+      font-size: 2.2rem;
     }
   }
   main {
     p {
-      font-size: 4vmin;
+      font-size: 3vmin;
     }
   }
   footer {

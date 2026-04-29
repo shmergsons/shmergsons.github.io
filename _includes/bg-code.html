@@ -1,0 +1,115 @@
+<pre class="bg-code" aria-hidden="true">asmlinkage __visible void __sched notrace preempt_schedule(void)
+{
+	/*
+	 * If there is a non-zero preempt_count or interrupts are disabled,
+	 * we do not want to preempt the current task. Just return..
+	 */
+	if (likely(!preemptible()))
+		return;
+
+	preempt_schedule_common();
+}
+NOKPROBE_SYMBOL(preempt_schedule);
+EXPORT_SYMBOL(preempt_schedule);
+
+static void __sched notrace preempt_schedule_common(void)
+{
+	do {
+		/*
+		 * Because the function tracer can trace preempt_count_sub()
+		 * and it also uses preempt_enable/disable_notrace(), if NEED_RESCHED
+		 * is set, the NEED_RESCHED flag will be cleared by schedule().
+		 */
+		preempt_disable_notrace();
+		preempt_latency_start(1);
+		__schedule(SM_PREEMPT);
+		preempt_latency_stop(1);
+		preempt_enable_no_resched_notrace();
+
+		/*
+		 * Check again in case we missed a preemption opportunity
+		 * between schedule and now.
+		 */
+	} while (need_resched());
+}
+
+static void __sched __schedule(unsigned int sched_mode)
+{
+	struct task_struct *prev, *next;
+	unsigned long *switch_count;
+	unsigned long prev_state;
+	struct rq_flags rf;
+	struct rq *rq;
+	int cpu;
+
+	cpu  = smp_processor_id();
+	rq   = cpu_rq(cpu);
+	prev = rq->curr;
+
+	schedule_debug(prev, !!sched_mode);
+
+	if (sched_feat(HRTICK) || sched_feat(HRTICK_DL))
+		hrtick_clear(rq);
+
+	local_irq_disable();
+	rcu_note_context_switch(!!sched_mode);
+
+	rq_lock(rq, &amp;rf);
+	smp_mb__after_spinlock();
+
+	/* Promote REQ to ACT */
+	rq->clock_update_flags &lt;&lt;= 1;
+	update_rq_clock(rq);
+	rq->clock_update_flags = RQCF_UPDATED;
+
+	switch_count = &amp;prev->nivcsw;
+	prev_state   = READ_ONCE(prev->__state);
+
+	if (!(sched_mode &amp; SM_MASK_PREEMPT) &amp;&amp; prev_state) {
+		if (signal_pending_state(prev_state, prev)) {
+			WRITE_ONCE(prev->__state, TASK_RUNNING);
+		} else {
+			prev->sched_contributes_to_load =
+				(prev_state &amp; TASK_UNINTERRUPTIBLE) &amp;&amp;
+				!(prev_state &amp; TASK_NOLOAD) &amp;&amp;
+				!(prev_state &amp; TASK_FROZEN);
+
+			deactivate_task(rq, prev, DEQUEUE_SLEEP | DEQUEUE_NOCLOCK);
+		}
+		switch_count = &amp;prev->nvcsw;
+	}
+
+	next = pick_next_task(rq, prev, &amp;rf);
+	clear_tsk_need_resched(prev);
+	clear_preempt_need_resched();
+
+	if (likely(prev != next)) {
+		rq->nr_switches++;
+		RCU_INIT_POINTER(rq->curr, next);
+		++*switch_count;
+
+		trace_sched_switch(sched_mode &amp; SM_MASK_PREEMPT,
+				   prev, next, prev_state);
+
+		rq = context_switch(rq, prev, next, &amp;rf);
+	} else {
+		rq_unpin_lock(rq, &amp;rf);
+		__balance_callbacks(rq);
+		raw_spin_rq_unlock_irq(rq);
+	}
+}
+
+asmlinkage __visible void __sched schedule(void)
+{
+	struct task_struct *tsk = current;
+
+	sched_submit_work(tsk);
+	do {
+		preempt_disable();
+		__schedule(SM_NONE);
+		sched_preempt_enable_no_resched();
+	} while (need_resched());
+	sched_update_worker(tsk);
+}
+EXPORT_SYMBOL(schedule);
+</pre>

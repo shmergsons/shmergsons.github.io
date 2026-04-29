@@ -11,19 +11,48 @@
 }
 
 body {
-  background: url("computer-circuit.png"),
-    linear-gradient(180deg, black 0%, black 20%, #024130 100%),
-    #024130;
-  background-size: 250vw auto, auto, auto;
+  background:
+    radial-gradient(ellipse at 50% 30%, #0a3a2a 0%, #02110c 70%, #000 100%),
+    #02110c;
+  background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: -70vw -5vh, left top, left top;
+}
+
+.bg-code {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  padding: 1.5rem 1rem;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-family: 'OCR A Std', 'Courier New', Courier, monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: #4a8e74;
+  opacity: 0.28;
+  white-space: pre;
+  overflow: hidden;
+  filter: blur(1.5px);
+  text-shadow: 0 0 8px rgba(74, 142, 116, 0.5);
+  column-width: 30em;
+  column-gap: 2.5em;
+  column-fill: auto;
 }
 
 @media only screen and (min-width: 600px) {
-  body {
-    background-size: 150vw auto, auto, auto;
-    background-position: -10vw -20vh, left top, left top;
+  .bg-code {
+    font-size: 0.8rem;
+    padding: 2rem 1.5rem;
   }
+}
+
+div.wrapper {
+  position: relative;
+  z-index: 1;
 }
 header {
   // background-image: url('circuit-board.png');
